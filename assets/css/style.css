@@ -1,0 +1,33 @@
+.city-container {
+    padding: 10px 30px 10px 30px;
+}
+
+.weather-container {
+    padding: 10px 30px 10px 30px;
+}
+
+.btn-primary {
+    margin : 10px 0 10px 0 ;
+    border-bottom: solid black 4mm;
+}
+
+.city-btn {
+    margin: 0 0 5px 0;
+}
+
+
+.now-container {
+    display: block;
+    width: 100%;
+}
+
+
+.five-day-container {
+    justify-content: space-between;
+}
+
+.card {
+    color:white;
+    background-color: slategray;
+    padding: 10px 20px 10px 20px;
+}

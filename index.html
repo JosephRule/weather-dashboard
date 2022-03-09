@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Work Day Scheduler</title>
+  </head>
+
+  <body>
+
+    <header class="jumbotron">
+      <h1>Weather Dashboard</h1>
+    </header>
+
+    <main class = "row">
+        <div class="col-4 city-container">
+            <h2>Search for a City:</h2>
+            <input type="text" class="form-control" id="cityInput" placeholder="San Francisco">
+            <button type="submit" class="btn btn-block btn-primary border-bottom">Search</button>
+            <div class="list-group">
+                <button type="btn btn-block" class="city-btn">San Diego</button>
+                <button type="btn btn-block" class="city-btn">Chicago</button>
+            </div>
+        </div>
+
+        <div class="col weather-container">
+            <div class="row">
+                <div class="col now-container">
+                  <h2>Atlanta (3/30/2010)</h2>
+                  <p>Temp: Stuff</p>
+                  <p>Wind: high</p>
+                  <p>Humidity: high</p>
+                  <p>UV: extra high</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                  <h2>5-Day Forecast:</h3>
+                  <div class= "row five-day-container">
+                    <div class="card">
+                      <p>3/31/2012</p>
+                      <p>picture</p>
+                      <p>temp: 45</p>
+                      <p>humidity: stuff</p>
+                      <p>uv: another</p>
+                    </div>
+                    <div class="card"></div>
+                    <div class="card"></div>
+                    <div class="card"></div>
+                    <div class="card"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./assets/js/main.js"></script>
+  </body>
+</html>
