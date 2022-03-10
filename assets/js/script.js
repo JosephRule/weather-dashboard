@@ -1,9 +1,23 @@
-var city_list = ["Chicago", "San Diego"]
+
 key = "2c473e169f8a220e8e39ee2313398215"
-city = "Chicago"
 
 
-var getLatLong = function(city) {
+
+var loadOrInitalizeCityList = function() {
+    cityList = JSON.parse(localStorage.getItem("cityList"))
+
+    if (!cityList) {
+        cityList = ["Chicago", "San Diego"]
+    }
+
+    for (var i=0; i<cityList.length; i++) {
+
+        createCityButton(cityList[i])
+    }
+    return cityList
+}
+
+var getLatLon = function(city) {
     var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q="
                 + city + "&limit=1&appid=" + key
 
@@ -33,15 +47,10 @@ var getWeather = function(lat, lon) {
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function(data){
-                    console.log(data)
 
-                    console.log("5 day values")
-                    i = 0
-                    console.log("date" + data.daily[i].dt)
-                    console.log("clouds" + data.daily[i].clouds)
-                    console.log("temp K" + data.daily[i].temp.day)
-                    console.log("temp F" + ((data.daily[i].temp.day - 273.15) * 9/5 + 32) )
-                    console.log("humidity" + data.daily[i].humidity)
+                    console.log(data)
+                    $(".current-container").empty()
+                    $(".forecast-container").empty()
                     createPresent(data);
                     for (var i = 0; i<5; i++) {
                         createForecastCard(data.daily[i])
@@ -62,19 +71,23 @@ var createPresent = function(data) {
         .text(city + ":   " + moment.unix(data.current.dt).format("MMMM/DD/YYYY"))
     console.log(data.current.dt)
     var tempEl = $("<p>")
-        .text("Temp: " + ((data.current.temp - 273.15) * 9/5 + 32) +" F")
+        .text("Temp: " + Math.round((data.current.temp - 273.15) * 9/5 + 32) +" F")
     var windEl = $("<p>")
         .text("Wind: " + data.current.wind_speed + " MPH")
     var humidityEl = $("<p>")
         .text("Humidity: " + data.current.humidity + " %")
-    if (data.current.uvi  > 1) {
-        uviClass = "red"
+    if (data.current.uvi  < 2) {
+        uviClass = "bg-success"
+    }
+    else if (data.current.uvi < 5) {
+        uviClass = "bg-warning"
     }
     else {
-        uviClass = "blue"
+        uviClass = "bg-danger"
     }
     var uviEl = $("<p>")
         .text("UVI: " + data.current.uvi)
+        .addClass(uviClass)
 
     $(".current-container").append(titleEl, tempEl, windEl, humidityEl, uviEl);
 }
@@ -91,8 +104,25 @@ var createForecastCard = function(dailyData) {
     $(".forecast-container").append(cardEl)
 }
 
-var searchButtonHandler = function(event) {
-    
+var createCityButton = function(city) {
+    var cityBtnEl = $("<button>").text(city).addClass("city-btn")
+    $(".list-group").append(cityBtnEl)
 }
 
-getLatLong(city)
+$(document).on("click", ".btn-primary", function() {
+    city = $(this).prev().val()
+    getLatLon($(this).prev().val())
+    createCityButton(city)
+    cityList.push(city)
+    localStorage.setItem("cityList", JSON.stringify(cityList))
+
+})
+
+$(document).on("click", ".city-btn", function() {
+    console.log($(this).text())
+    city = $(this).text()
+    getLatLon(city)
+})
+
+
+cityList = loadOrInitalizeCityList()
