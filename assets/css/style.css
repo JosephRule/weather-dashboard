@@ -16,13 +16,13 @@
 }
 
 
-.now-container {
+.current-container {
     display: block;
     width: 100%;
 }
 
 
-.five-day-container {
+.forecast-container {
     justify-content: space-between;
 }
 
